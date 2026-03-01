@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grievance Portal | Government of Tamil Nadu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --tn-dark-green: #004d40;
+            --tn-gold: #ffc107;
+            --tn-light-bg: #f4f7f6;
+            --tn-accent: #00695c;
+            --white: #ffffff;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--tn-light-bg);
+            color: #333;
+        }
+
+        /* ===== TOP LOGO SECTION ===== */
+        .gov-header {
+            background: var(--white);
+            padding: 15px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 4px solid var(--tn-gold);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .logo-group {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .tn-emblem {
+            height: 80px;
+            width: auto;
+        }
+
+        .header-text h1 {
+            margin: 0;
+            font-size: 22px;
+            color: var(--tn-dark-green);
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .header-text p {
+            margin: 2px 0 0;
+            font-size: 14px;
+            color: #666;
+            font-weight: 600;
+        }
+
+        /* ===== HERO BANNER ===== */
+        .hero {
+            background: linear-gradient(135deg, var(--tn-dark-green) 0%, #002d26 100%);
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero h2 {
+            font-size: 28px;
+            margin: 0;
+            letter-spacing: 1px;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--tn-gold);
+        }
+
+        /* ===== FORM CONTAINER ===== */
+        .container {
+            max-width: 900px;
+            margin: -30px auto 50px;
+            background: var(--white);
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            padding: 40px;
+            position: relative;
+            z-index: 10;
+        }
+
+        .form-section-title {
+            font-size: 18px;
+            color: var(--tn-accent);
+            border-left: 5px solid var(--tn-gold);
+            padding-left: 15px;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+
+        /* ===== FORM STYLING ===== */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .full-width { grid-column: span 2; }
+
+        .field-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        label {
+            font-size: 13px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: #444;
+            text-transform: uppercase;
+        }
+
+        input, select, textarea {
+            padding: 12px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            font-size: 15px;
+            transition: all 0.3s ease;
+        }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: var(--tn-accent);
+            box-shadow: 0 0 0 3px rgba(0, 105, 92, 0.1);
+        }
+
+        /* ===== FILE UPLOAD ===== */
+        .upload-area {
+            background: #f8f9fa;
+            border: 2px dashed #004d40;
+            padding: 20px;
+            text-align: center;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        .upload-area:hover { background: #f1f3f5; }
+
+        /* ===== BUTTONS ===== */
+        .btn-submit {
+            background: var(--tn-dark-green);
+            color: white;
+            border: none;
+            padding: 16px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            transition: background 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-submit:hover {
+            background: #002d26;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: #eee;
+            font-size: 13px;
+            color: #666;
+        }
+
+        @media (max-width: 768px) {
+            .grid { grid-template-columns: 1fr; }
+            .full-width { grid-column: span 1; }
+            .gov-header { flex-direction: column; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="gov-header">
+    <div class="logo-group">
+        <svg width="80" height="80" viewBox="0 0 100 100" class="tn-emblem">
+            <circle cx="50" cy="50" r="45" fill="none" stroke="#004d40" stroke-width="2"/>
+            <path d="M50 15 L60 35 L80 35 L65 50 L75 70 L50 60 L25 70 L35 50 L20 35 L40 35 Z" fill="#004d40"/>
+            <rect x="45" y="65" width="10" height="20" fill="#004d40"/>
+        </svg>
+        <div class="header-text">
+            <h1>தமிழ்நாடு அரசு</h1>
+            <p>Government of Tamil Nadu</p>
+        </div>
+    </div>
+    <div class="logo-group">
+        <p style="font-size: 12px; text-align: right; color: #777;">Special Programme<br>Implementation Department</p>
+    </div>
+</header>
+
+<div class="hero">
+    <h2>Public Grievance Redressal Portal</h2>
+    <p>Ensuring transparency and swift action for every citizen</p>
+</div>
+
+<div class="container">
+    <form action="#" method="POST" enctype="multipart/form-data">
+        
+        <div class="form-section-title"><i class="fas fa-user"></i> Applicant Details</div>
+        <div class="grid">
+            <div class="field-group">
+                <label>Full Name (பெயர்) *</label>
+                <input type="text" name="name" placeholder="Enter your full name" required>
+            </div>
+            <div class="field-group">
+                <label>Mobile Number (கைபேசி எண்) *</label>
+                <input type="tel" name="mobile" pattern="[0-9]{10}" placeholder="10-digit number" required>
+            </div>
+            <div class="field-group">
+                <label>Email ID (மின்னஞ்சல்) *</label>
+                <input type="email" name="email" placeholder="example@mail.com" required>
+            </div>
+            
+            <div class="field-group">
+                <label>District (மாவட்டம்) *</label>
+                <input type="text" name="district" placeholder="Enter District" required>
+            </div>
+            <div class="field-group">
+                <label>City (மாநகரம்) *</label>
+                <input type="text" name="city" placeholder="Enter City" required>
+            </div>
+            <div class="field-group">
+                <label>Town Panchayat (பேரூராட்சி) *</label>
+                <input type="text" name="town_panchayat" placeholder="Enter Town Panchayat" required>
+            </div>
+            <div class="field-group">
+                <label>Street Name (தெரு பெயர்) *</label>
+                <input type="text" name="street" placeholder="Enter Street Name" required>
+            </div>
+            <div class="field-group">
+                <label>Ward Number (வார்டு எண்) *</label>
+                <input type="text" name="ward" placeholder="Enter Ward Number" required>
+            </div>
+        </div>
+
+        <div style="margin-top: 30px;" class="form-section-title"><i class="fas fa-file-alt"></i> Grievance Information</div>
+        <div class="grid">
+            <div class="field-group full-width">
+                <label>Select Department (துறை) *</label>
+                <select name="department" required>
+                    <option value="">-- Choose Department --</option>
+                    <option value="Water">Water</option>
+                    <option value="PWD">PWD</option>
+                    <option value="Electricity">Electricity</option>
+                    <option value="Sanitation">Sanitation</option>
+                    <option value="Transport">Transport</option>
+                    <option value="Revenue">Revenue</option>
+                    <option value="Health">Health</option>
+                    <option value="Education">Education</option>
+                    <option value="Police">Police</option>
+                    <option value="Society">Society</option>
+                </select>
+            </div>
+            <div class="field-group full-width">
+                <label>Subject of Grievance (தலைப்பு) *</label>
+                <input type="text" name="subject" placeholder="Brief summary of your issue" required>
+            </div>
+            <div class="field-group full-width">
+                <label>Detailed Description (விளக்கம்) *</label>
+                <textarea name="description" placeholder="Please provide detailed information about your grievance..." required></textarea>
+            </div>
+            <div class="field-group full-width">
+                <label>Attachments (இணைப்புகள்)</label>
+                <div class="upload-area">
+                    <input type="file" name="attachments" accept=".pdf,image/*,video/mp4" multiple>
+                    <p style="font-size: 12px; color: #666; margin-top: 8px;">
+                        Upload photos, PDFs, or videos (Max 10MB per file)
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <button type="submit" class="btn-submit">Submit Registration</button>
+    </form>
+</div>
+
+<footer class="footer">
+    <p>© 2026 Government of Tamil Nadu. All Rights Reserved.</p>
+    <p>Designed for Smart Governance Initiative | National Informatics Centre (NIC) Support</p>
+</footer>
+<script>
+document.querySelector("form").addEventListener("submit", function(e){
+    e.preventDefault();
+    alert("✅ Demo Submission Successful!\n(This is a portfolio demonstration)");
+});
+</script>
+</body>
+</html>

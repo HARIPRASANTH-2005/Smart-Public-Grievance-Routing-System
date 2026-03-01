@@ -1,0 +1,185 @@
+{
+  "name": "Complaint Resolution Notification",
+  "nodes": [
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.manualTrigger",
+      "typeVersion": 1,
+      "position": [
+        16,
+        -192
+      ],
+      "id": "5b91a1f3-e107-4bea-b5a3-281c0d28ed5d",
+      "name": "When clicking ‘Execute workflow’"
+    },
+    {
+      "parameters": {
+        "documentId": {
+          "__rl": true,
+          "value": "=",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "",
+          "mode": "list",
+          "cachedResultName": "",
+          "cachedResultUrl": ""
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        224,
+        -192
+      ],
+      "id": "c02bd9c7-c6b9-4f17-b5a5-bb4ac7552cf3",
+      "name": "Get row(s) in sheet"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 3
+          },
+          "conditions": [
+            {
+              "id": "83fabbac-f611-48f9-842f-4e562f3e35a4",
+              "leftValue": "={{ $json[\"Status\"] }}",
+              "rightValue": "Completed",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            },
+            {
+              "id": "8e2a386c-5b17-49e2-a0a6-5dabf3db6188",
+              "leftValue": "={{ $json.Notification }}",
+              "rightValue": "No",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.3,
+      "position": [
+        400,
+        -192
+      ],
+      "id": "49db2a99-1f0f-4de7-b782-5022b36ee2c2",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "sendTo": "={{ $json[\"Email\"] }}",
+        "subject": "=Complaint Resolved – ID {{ $json[\"Complaint ID\"] }}",
+        "message": "=<div style=\"font-family: Arial, sans-serif; line-height:1.6; color:#333\">\n  <p>Dear {{ $json[\"Name\"] }},</p>\n\n  <p>\n    We are pleased to inform you that your grievance\n    (<strong>Complaint ID: {{ $json[\"Complaint ID\"] }}</strong>)\n    has been successfully resolved by the concerned department.\n  </p>\n\n  <p>\n    Thank you for using the <strong>Smart Public Grievance Routing System</strong>.\n  </p>\n\n  <p style=\"font-size:12px;color:#666\">\n    This is an automated notification. Please do not reply.\n  </p>\n</div>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        640,
+        -208
+      ],
+      "id": "9fffe7f0-b8f8-485d-84a7-9d51fc42ad05",
+      "name": "Send a message",
+      "webhookId": "REDACTED"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "documentId": {
+          "__rl": true,
+          "value": "=",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "",
+          "mode": "list",
+          "cachedResultName": "",
+          "cachedResultUrl": ""
+        }
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        848,
+        -208
+      ],
+      "id": "fff6132b-c144-44fd-bc37-9c055d9a84fc",
+      "name": "Update row in sheet"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "When clicking ‘Execute workflow’": {
+      "main": [
+        [
+          {
+            "node": "Get row(s) in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get row(s) in sheet": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Send a message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send a message": {
+      "main": [
+        [
+          {
+            "node": "Update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false
+  },
+  "versionId": "59533f7b-4e22-41ab-a6de-81354ff84016",
+  "meta": {
+    "instanceId": "f5a26642e598ddfa7a54ba42214c27f92bee594a3e7151af24f742e3ba1ba0ed"
+  },
+  "id": "kL2YI5GtK2moZg8f",
+  "tags": []
+}
